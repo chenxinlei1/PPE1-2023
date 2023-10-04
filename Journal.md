@@ -16,4 +16,6 @@ nous les avons oubliées.
 Dans la deuxième partie du cours, le professeur nous a présenté "Git", qui est un système de gestion de versions. Nous pouvons l'utiliser sur
 GitHub pour télécharger ou déposer des documents dont nous avons besoin. Par exemple, "git clone", "git add", "git commit" etc.
 
-10/04/2023
+04/10/2023
+azertyuiop
+qsdfghjklm
