@@ -20,5 +20,13 @@ GitHub pour télécharger ou déposer des documents dont nous avons besoin. Par 
 
 ##04/10/2023
 ##séance3
-azertyuiop
-qsdfghjklm
+Nous avons appris des syntaxs pour corriger des erreurs sur Github. 
+
+1- Git reset: utilisé pour réinitialiser le référentiel Git à un commit spécifique. (git reset --soft, git reset --mixed, git reset --hard) 
+
+2- Git revert: utilisé pour annuler les modifications apportées par un ou plusieurs commits en créant un nouveau commit qui annule les changements effectués par les commits ciblés. 
+
+3- HEAD : représente le commit sur lequel vous êtes en train de travailler. 
+<tag> : représente le commit sur lequel on a placé l’étiquette
+ ̃[N] : représente l’ascendance directe de votre commit (linéaire, par défault N=1 représente le commit parent)
+ˆ[N] : représente le n-ième parent du commit (non linéaire, par défault N=1 représente le commit parent)
