@@ -30,3 +30,41 @@ Nous avons appris des syntaxs pour corriger des erreurs sur Github.
 <tag> : représente le commit sur lequel on a placé l’étiquette
  ̃[N] : représente l’ascendance directe de votre commit (linéaire, par défault N=1 représente le commit parent)
 ˆ[N] : représente le n-ième parent du commit (non linéaire, par défault N=1 représente le commit parent)
+
+
+##11/10/2023
+##séance4
+Redirections vers et depuis des fichiers
+- < remplace le clavier par le contenu d’un fichier
+- > écrit stdout dans un fichier
+- 2> écrit stderr dans un fichie
+- >& écrit stdout et stderr dans un fichierr
+En écriture, si on double le chevron (>>, >>&, 2>>), on écrit en ajoutant la sortie à la fin d’un fichier.
+ATTENTION: les chevronts simples (>, >&, 2>) écrasent le fichier si il existe déjà.
+
+Quelques commandes de plus
+grep recherche de motifs dans l’entrée (ou dans des fichiers)
+sort trier des lignes
+uniq supprimer les lignes qui se répètent
+echo affiche un texte (pour formater vos résultats)
+
+Dans un script bash
+Par convention, au début de l’exécution d’un script, l’interpréteur donne la valeur des arguments aux variables $1 $2 $3 . . .
+dans l’ordre d’apparition sur la ligne de commande.
+• On peut les utiliser dans notre script
+(ex: faites un script qui contient uniquement la commande echo $2 et testez son comportement)
+• Un bon usage est de créer de nouvelles variables avec un nom plus explicite.
+example: FICHIER_URLS=$1
+
+Affectation
+On donne une valeur à une variable avec le signe =
+• sans espace FICHIER=urls.txt
+• avec des " ou ’ si il y a des espaces
+MSG="Bonjour tout le monde"
+• on peut aussi stocker le resultat d’une commande en l’écrivant dans $()
+ex: NB_LIGNES=$(wc -l $FICHIER)
+
+Utilisation
+On fait référence à la valeur d’une variable en prefixant son nom d’un $
+• sera remplacé dans une chaîne entre " (doubles)
+• mais pas entre ’ (simples)
