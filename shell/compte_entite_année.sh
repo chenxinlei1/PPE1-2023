@@ -7,4 +7,4 @@ ANNEE=$2
 
 
 echo "Nombre de $ENTITE pour l'année $ANNEE :"
-cat ~/Desktop/PPE1-2023/fichers/Fichiers/ann/$ANNEE/*/*.ann|grep "$ENTITE"|cut -f 3|sort|uniq -c|wc -l
+cat Fichiers/ann/$ANNEE/*/*.ann|grep "$ENTITE"|cut -f 3|sort|uniq -c|wc -l

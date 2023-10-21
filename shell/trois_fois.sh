@@ -4,6 +4,7 @@
 
 ENTITE=$1
 
-bash un_script $1 2016
-bash un_script $1 2017
-bash un_script $1 2018
+
+bash un_script.sh $1 2016
+bash un_script.sh $1 2017
+bash un_script.sh $1 2018
