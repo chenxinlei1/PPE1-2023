@@ -143,15 +143,12 @@ Pourquoi ne pas utiliser cat ?
 Il est préférable de ne pas utiliser cat pour lire un fichier ligne par ligne dans ce cas, car cat ne lit que le contenu du fichier en une seule sortie, tandis que while read -r line permet de lire chaque ligne du fichier séparément, ce qui est utile pour traiter chaque URL individuellement.
 
 #!/usr/bin/env bash
-
 if [ $# -ne 1 ]
 then
     echo "Ce script a besoin d'un argument : <chemin du fichier>."
     exit
 fi
-
 chemin="$1"
-
 if [ ! -f "$chemin" ]
 then
 
@@ -159,9 +156,7 @@ then
 
     exit
 fi
-
 N=1
-
 while read -r line
 do
     http_response=$(curl -I -s "${line}")
