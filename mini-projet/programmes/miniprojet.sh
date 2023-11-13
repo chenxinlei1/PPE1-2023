@@ -16,6 +16,13 @@ then
     exit
 fi
 
+
+echo "<html>"
+echo "<head><title>Tableau</title><meta charset="UTF-8" /></head>"
+echo "<body>"
+echo "<table border='1'>"
+echo "<tr><th>URL</th><th>http_code</th><th>encoding</th></tr>"
+
 N=1
 
 while read -r line
@@ -28,7 +35,13 @@ do
     then
         encoding="N/A"
     fi
-	echo -e "${N}\t${line}\t$http_code\t$encoding"
+
 	N=$(expr $N + 1)
+    echo "<tr><td>${line}</td><td>${http_code}</td><td>${encoding}</td></tr>"
 
 done < "$chemin"
+
+
+echo "</table>"
+echo "</body>"
+echo "</html>"

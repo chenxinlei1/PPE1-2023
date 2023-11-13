@@ -36,10 +36,11 @@ Nous avons appris des syntaxs pour corriger des erreurs sur Github.
 ## séance4
 Redirections vers et depuis des fichiers
 
-- <  remplace le clavier par le contenu d’un fichier
-- >  écrit stdout dans un fichier
-- 2> écrit stderr dans un fichie
-- >& écrit stdout et stderr dans un fichierr
+- '<' remplace le clavier par le contenu d’un fichier
+- '>' écrit stdout dans un fichier
+- ‘2>‘ écrit stderr dans un fichier
+- '>&' écrit stdout et stderr dans un fichier 
+
 En écriture, si on double le chevron (>>, >>&, 2>>), on écrit en ajoutant la sortie à la fin d’un fichier.
 ATTENTION: les chevronts simples (>, >&, 2>) écrasent le fichier si il existe déjà.
 
@@ -85,10 +86,10 @@ fi
 
 example:
 
-if [[ $1 =∼ bon ( jour | soir ) ]]
-then
-    echo "salut"
-fi
+    if [[ $1 =∼ bon ( jour | soir ) ]]
+    then
+        echo "salut"
+    fi
 
 -lt (<) -le (<=) -gt (>) -ge (>=) -eq (=) -ne (!=)
 
@@ -96,34 +97,40 @@ Conditions possibles:
 
 Sur les chemins
 
-    -f fichier vrai si le fichier existe
-    -d dossier vrai si le dossier existe
-    -s fichier vrai si le fichier existe et n’est pas vide
+-f fichier vrai si le fichier existe
+
+-d dossier vrai si le dossier existe
+
+-s fichier vrai si le fichier existe et n’est pas vide
+
 Sur des chaînes de caractères
 
-    = ou != tester si deux chaînes sont identiques (=) ou différentes (!=)
-    < ou > pour déterminer si in chaîne est avant ou après une autre dans l’ordre alphabétique
-    -n chaine vrai si la chaîne n’est pas vide
-    -z vrai si la chaîne est vide (ex: argument non fourni)
+= ou != tester si deux chaînes sont identiques (=) ou différentes (!=)
+
+< ou > pour déterminer si in chaîne est avant ou après une autre dans l’ordre alphabétique
+
+-n chaine vrai si la chaîne n’est pas vide
+
+-z vrai si la chaîne est vide (ex: argument non fourni)
 
 
 Les boucles FOR
 
-N =0
-for ELEMENT in a b c d e
-do
+    N =0
+    for ELEMENT in a b c d e
+    do
     N = $ ( expr $N + 1)
     echo " le $N ieme élément est $ELEMENT "
-done
+    done
 
  la commande expr est une calculatrice
 
 Les boucles WHILE
 
-while [ condition ];
-do
-    echo " je continue à boucler " ;
-done
+    while [ condition ];
+    do
+        echo " je continue à boucler " ;
+    done
 
 boucle infinie: ctrl+c
 
@@ -142,52 +149,116 @@ Nous avons choisi un mot ensemble sur le projet du group. Et après nous avons f
 Pourquoi ne pas utiliser cat ?
 Il est préférable de ne pas utiliser cat pour lire un fichier ligne par ligne dans ce cas, car cat ne lit que le contenu du fichier en une seule sortie, tandis que while read -r line permet de lire chaque ligne du fichier séparément, ce qui est utile pour traiter chaque URL individuellement.
 
-#!/usr/bin/env bash
+    #!/usr/bin/env bash
 
-if [ $# -ne 1 ]
-
-then
-
-    echo "Ce script a besoin d'un argument : <chemin du fichier>."
-
-    exit
-
-fi
-
-chemin="$1"
-
-if [ ! -f "$chemin" ]
-
-then
-
-    echo "Le fichier spécifié n'existe pas."
-
-    exit
-fi
-
-N=1
-
-while read -r line
-
-do
-
-    http_response=$(curl -I -s "${line}")
-
-    http_code=$(echo "$http_response" | grep -oE 'HTTP/[0-9.]+\s[0-9]+' | awk '{print $2}')
-
-    encoding=$(echo "$http_response" | grep -i 'Content-Type' | grep -oP 'charset=\K([-A-Za-z0-9]+)')
-
-
-	if [ -z "$encoding" ]
+    if [ $# -ne 1 ]
 
     then
 
-        encoding="N/A"
+        echo "Ce script a besoin d'un argument : <chemin du fichier>."
+
+        exit
 
     fi
 
-	echo -e "${N}\t${line}\t$http_code\t$encoding"
+    chemin="$1"
 
-	N=$(expr $N + 1)
+    if [ ! -f "$chemin" ]
 
-done < "$chemin"
+    then
+
+        echo "Le fichier spécifié n'existe pas."
+
+        exit
+    fi
+
+    N=1
+
+    while read -r line
+
+    do
+
+        http_response=$(curl -I -s "${line}")
+
+        http_code=$(echo "$http_response" | grep -oE 'HTTP/[0-9.]+\s[0-9]+' | awk '{print $2}')
+
+        encoding=$(echo "$http_response" | grep -i 'Content-Type' | grep -oP 'charset=\K([-A-Za-z0-9]+)')
+
+
+	    if [ -z "$encoding" ]
+
+        then
+
+            encoding="N/A"
+
+        fi
+
+	    echo -e "${N}\t${line}\t$http_code\t$encoding"
+
+	    N=$(expr $N + 1)
+
+        done < "$chemin"
+
+## 08/11/2023
+## séance7
+
+Dans cette séance, nous avons révisé et amélioré les scripts que nous avions développés la semaine passée. Et nous avons revu la construction de HTML.
+
+**Structure de base d'une page HTML :**
+
+La balise racine \<html> contenant deux principales parties :
+
+\<head>: L’entête du fichier, incluant les métadonnées.
+
+\<body>: Le corps du fichier, contenant le contenu textuel et la structure.
+
+**Création de tableaux en HTML :** 
+
+Pour créer un tableau, on utilise les balises table (racine du tableau), tr (ligne de tableau), th (cellule d'entête), et td (cellule de données).
+
+**Exemple d'utilisation :** 
+
+L'exemple montre comment transformer une sortie tabulaire en une page HTML, illustrant l'utilisation des balises HTML pour créer un tableau structuré.
+
+Et après j'ai fait le **miniprojet supplémentaire** pour obtenir une liste de fréquences de biagrammes:
+
+voici le code:
+
+    #!/usr/bin/env bash
+
+
+    if [ $# -lt 1 ]; then
+        echo "Ce script demande en argument un fichier texte"
+        exit 1
+    fi
+
+    file=$1
+    nombre_de_mot=$2
+
+    if [ -z "$2" ]
+    then
+        nombre_de_mot=25
+    fi
+
+    cat $file | grep -oE '\w+' $file | sed 's/[[:upper:]]*/\L&/g' > texte.txt
+
+
+    tail -n +2 texte.txt > texte1.txt
+    head -n -1 texte.txt > texte2.txt
+
+
+    paste texte2.txt texte1.txt > bigrammes.txt
+
+    sort bigrammes.txt | uniq -c | sort -nr | head -n $nombre_de_mot > frequence_bigrammes.txt
+**Explication:**
+
+**[ -z "$2" ]**: Cette condition vérifie si la variable $2 (le deuxième argument du script) est vide (-z). Si $2 est vide, nombre_de_mot est défini à 25 par défaut.
+
+**grep -oE '\w+'** : Cette commande utilise grep pour extraire les mots du fichier. L'option -o indique à grep de n'afficher que la partie du fichier qui correspond à l'expression régulière. L'expression régulière \w+ correspond à un ou plusieurs mots.
+
+**sed 's/[[:upper:]]*/\L&/g'** :
+Cette commande utilise sed pour convertir toutes les lettres majuscules en minuscules. L'expression régulière [[:upper:]]* correspond à toutes les lettres majuscules et \L& les convertit en minuscules.
+Au début j'ai essayé **tr '[:upper:]' '[:lower:]'** mais il ne peut pas changer les caractères diacrité majuscules en minusucle.
+
+**paste texte2.txt texte1.txt > bigrammes.txt** : Cette commande utilise **paste** pour fusionner les lignes des fichiers texte2.txt et texte1.txt. Chaque ligne de texte2.txt est placée à côté de la ligne correspondante de texte1.txt, créant ainsi des paires de mots (bigrammes).
+
