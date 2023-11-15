@@ -9,6 +9,14 @@ fi
 file=$1
 nombre_de_mot=$2
 
+if [ ! -f "$file" ]
+then
+
+    echo "Le fichier spécifié n'existe pas."
+
+    exit
+fi
+
 if [ -z "$2" ]
 then
     nombre_de_mot=25

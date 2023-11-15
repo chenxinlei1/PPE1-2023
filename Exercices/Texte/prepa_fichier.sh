@@ -8,5 +8,15 @@ then
 	exit
 fi
 
-grep -oE '\w+' $file | sed 's/[[:upper:]]*/\L&/g' > texte_nettoye.txt
+if [ ! -f "$file" ]
+then
+
+    echo "Le fichier spécifié n'existe pas."
+
+    exit
+fi
+
+grep -oE '\w+' $file | sed 's/[[:upper:]]*/\L&/g'
+
+#grep -P -o '\p{latin}+' | tr '[:upper:]' '[:lower:]' | tr  'ÉÀÂÈ' 'éàâè'
 
