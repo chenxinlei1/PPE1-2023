@@ -18,7 +18,7 @@ fi
 
 
 echo "<html>"
-echo "<head><title>Tableau</title><meta charset="UTF-8" /></head>"
+echo "<head><title>Tableau</title><meta charset=\"UTF-8\" /></head>"
 echo "<body>"
 echo "<table border='1'>"
 echo "<tr><th>URL</th><th>http_code</th><th>encoding</th></tr>"
