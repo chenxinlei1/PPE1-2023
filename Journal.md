@@ -262,3 +262,57 @@ Au début j'ai essayé **tr '[:upper:]' '[:lower:]'** mais il ne peut pas change
 
 **paste texte2.txt texte1.txt > bigrammes.txt** : Cette commande utilise **paste** pour fusionner les lignes des fichiers texte2.txt et texte1.txt. Chaque ligne de texte2.txt est placée à côté de la ligne correspondante de texte1.txt, créant ainsi des paires de mots (bigrammes).
 
+
+## 15/11/2023
+## séance8
+
+Nous avons poursuivi le développement de notre mini-projet. Premièrement, nous avons mis en place un site pour notre dépôt GitHub. Pour accéder à cette page HTML, il est nécessaire de modifier le nom du lien :
+
+
+**Le dépôt** se trouve à l'adresse : https://github.com/chenxinlei1/PPE1-2023.
+**La page** correspondante est accessible via : https://chenxinlei1.github.io/PPE1-2023.
+
+Nous avons conçu une page d'accueil (index) et une page de tableau de résultats, en utilisant le framework CSS **Bulma** pour un style moderne et responsive. Notre site comprend :
+
+Une brève présentation du mini-projet, offrant une vue d'ensemble claire et concise.
+Un lien menant à la page HTML qui affiche le tableau des résultats, facilitant l'accès aux informations clés du projet.
+
+
+## 22/11/2023
+## séance9
+
+Cette semaine, nous avons avancé dans notre projet de groupe. Le concept s'articule autour de trois axes principaux :
+
+1. Archiver la page web aspirée ainsi que le dump textuel associé.
+2. Recenser les occurrences du mot ciblé dans le texte.
+3. Extraire ces occurrences, en incluant une ou deux lignes précédant et suivant chaque occurrence pour mieux les contextualiser.
+
+Voici le script principe:
+
+    #!/usr/bin/env bash
+    search_word="跨性别"
+    file=$1
+
+    if [ ! -f "$file" ]; then
+        echo "Le fichier spécifié n'existe pas."
+        exit 1
+    fi
+    
+    N=1
+    while read -r line; do
+    curl -o "dump${N}.txt" -s "${line}"
+    count=$(grep -o "$search_word" "dump${N}.txt" | wc -l)
+    rm "dump${N}.txt"
+
+    http_response=$(curl -I -s "${line}")
+    http_code=$(echo "$http_response" | grep -oE 'HTTP/[0-9.]+\s[0-9]+' | awk '{print $2}')
+    encoding=$(echo "$http_response" | grep -i 'Content-Type' | grep -oP 'charset=\K([-A-Za-z0-9]+)')
+
+    if [ -z "$encoding" ]; then
+        encoding="N/A"
+    fi
+
+
+    N=$(expr $N + 1)
+    done < "$file"
+
