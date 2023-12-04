@@ -316,3 +316,38 @@ Voici le script principe:
     N=$(expr $N + 1)
     done < "$file"
 
+
+## 29/11/2023
+## séance10
+
+
+**lang=$(basename $URL .txt)**
+    
+    basename $URL .txt a pour fonction de récupérer le nom de base du fichier contenu dans $URL (c'est-à-dire en enlevant la partie du chemin) et de supprimer l'extension .txt du nom de fichier.
+
+
+**lynx -dump -nolist "chemin absolu" >**
+    
+    Obtenir le contenu en texte pur d'une page web, en excluant toutes les listes de liens.
+
+
+**grep -C [number] 'mot' [file]**
+   
+    Afficher chaque ligne contenant "mot", ainsi que les 'number' lignes précédant et suivant chaque occurrence de ce terme.
+
+**sed 's/\(robots?\)/t\1\t/g'**
+
+**grep -o -i -P "(\w+\s){0,5}robots?(\s\w+){0,5}"**
+
+**grep -o -i -P "(\w+\W){0,5}robots?(\W\w+){0,5}"grep -o -i -P "(\w+\W){0,5}robots?(\W\w+){0,5}"**
+
+**grep -o -i -P "(\w+\W){0,5}robots?(\W\w+){0,5}" test.txt | sed 's/\(robots?\)/t\1\t/g'**
+
+
+https://regex101.com/
+
+iTrameur
+
+la loi hypergeométrique
+
+ 
