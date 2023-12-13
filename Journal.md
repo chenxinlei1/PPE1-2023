@@ -351,3 +351,51 @@ iTrameur
 la loi hypergeométrique
 
  
+
+## 06/12/2023
+## séance11
+**& remplacé par &amp; etc. :**
+
+`cleaned=$(echo $cleaned | sed 's/&/&amp;/g')`
+
+`cleaned=$(echo $cleaned | sed 's/</&lt;/g')`
+
+`cleaned=$(echo $cleaned | sed 's/>/&gt;/g')`
+
+
+**Autre méthode:**
+
+`cleaned=$(echo $cleaned | sed 's/&/&amp;/g;s/</&lt;/g;s/>/&gt;/g')`
+
+
+python3.9 -m venv demo_venv
+which python
+source demo_venv/bin/activate
+tree demo_venv/
+
+
+
+python3 ./coocurrence.py ficher itrameur_correction/tokenization... .txt   
+
+`--target "robot.*" -N 20 -s i --match-mode regex`
+`--target "robot.*" -N 20 -t itrameur`
+
+wordcloud:
+
+`wordcloud_cli --text dumps-text/ch-1.txt --image image.png`
+
+si on veux afficher les caractères chinois il faut modifier la police: 
+--fontfile
+
+open image.png (--scale 2/3)
+
+
+Pour télécharger **la police chinoise*:
+https://fonts.google.com/noto/specimen/Noto+Sans+SC
+
+
+
+
+
+
+
